@@ -176,7 +176,7 @@
    if(this.busy)return;
    if(this.comments.length>=1000){this.ctx.message('Er kunnen maximaal 1.000 opmerkingen in een project staan.');return;}
    if(this.commentPlacing)return false;
-   this.commentPlacing=true;this.ctx.completeTool?.();
+   this.commentPlacing=true;
    try{return !!await this.editComment(null,point);}finally{this.commentPlacing=false;}
   }
   async editComment(note,point){

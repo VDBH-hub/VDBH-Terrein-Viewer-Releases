@@ -2,7 +2,7 @@
 
 Officiële updates en bronbestanden voor de VDBH Terrein Viewer.
 
-## Nieuwste versie: BETA 0.2.68
+## Nieuwste versie: BETA 0.2.69
 
 [Download de nieuwste Windows-installer](https://github.com/VDBH-hub/VDBH-Terrein-Viewer-Releases/releases/latest)
 

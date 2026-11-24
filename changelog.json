@@ -1,6 +1,16 @@
 {
   "entries": [
     {
+      "version": "0.2.69",
+      "date": "24 november 2026",
+      "changes": [
+        "Gereedschappen blijven actief zolang hun icoonknop actief is. Stop door dezelfde knop opnieuw aan te klikken, een ander gereedschap te kiezen of Escape in te drukken.",
+        "Plaats meerdere hoogtepunten of opmerkingen achter elkaar. Na een afgerond profiel begint de volgende klik een nieuw profiel; een afgerond profiel wordt niet dubbel opgeslagen.",
+        "Boundary selecteren blijft actief om meerdere contours toe te voegen. Na een getekende boundary begint de volgende klik een nieuwe begrenzing.",
+        "Nieuwe surfaces starten automatisch met Rainbow op basis van hoogte. Opgeslagen kleurinstellingen van bestaande projecten blijven behouden."
+      ]
+    },
+    {
       "version": "0.2.68",
       "date": "24 november 2026",
       "changes": [

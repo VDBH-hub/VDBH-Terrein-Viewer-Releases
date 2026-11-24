@@ -1,3 +1,17 @@
+VDBH TERREIN VIEWER BETA 0.2.69
+
+ACTIEVE GEREEDSCHAPPEN EN STANDAARD RAINBOW
+
+Gereedschappen blijven actief na een geplaatste meting, opmerking of afgerond
+profiel. Stop via dezelfde icoonknop, een ander gereedschap of Escape.
+De volgende klik na een afgerond profiel start een nieuw profiel. Het laatst
+opgeslagen profiel blijft tot die klik zichtbaar en dynamisch gekoppeld.
+Bij Boundary tekenen vervangt een volgende klik de afgeronde begrenzing.
+Bij Boundary selecteren kun je extra contours blijven toevoegen.
+Nieuwe surfaces starten met Rainbow op basis van hoogte; dit kan per surface
+weer worden uitgezet. Bestaande projecten behouden hun opgeslagen kleurkeuzes.
+De handleiding is aangepast.
+
 VDBH TERREIN VIEWER BETA 0.2.68
 
 SNELKNOPPEN BOVEN DE 3D-VIEWER

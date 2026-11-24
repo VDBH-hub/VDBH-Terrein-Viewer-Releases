@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions
 cd /d "%~dp0"
-set "APP_VERSION=0.2.68"
+set "APP_VERSION=0.2.69"
 title VDBH Terrein Viewer BETA %APP_VERSION% - Windows installer bouwen
 
 echo ==================================================
