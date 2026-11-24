@@ -1,0 +1,75 @@
+{
+  "name": "vdbh-terrein-viewer",
+  "version": "0.2.68",
+  "description": "VDBH Terrein Viewer",
+  "main": "main.js",
+  "author": "VDBH",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "nl.vdbh.terreinviewer",
+    "productName": "VDBH Terrein Viewer",
+    "asar": true,
+    "files": [
+      "main.js",
+      "VDBH_Terrein_Viewer.html",
+      "package.json",
+      "node_modules/three/**/*",
+      "node_modules/jspdf/**/*",
+      "trimble-import.js",
+      "project-repository.cjs",
+      "project-state.js",
+      "project-features.js",
+      "preload.js",
+      "changelog.json",
+      "desktop-layout.js",
+      "profile-link.js",
+      "comments-report.js"
+    ],
+    "directories": {
+      "buildResources": ".",
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico",
+      "artifactName": "VDBH-Terrein-Viewer-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "VDBH Terrein Viewer",
+      "deleteAppDataOnUninstall": false
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "VDBH-hub",
+        "repo": "VDBH-Terrein-Viewer-Releases",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "dependencies": {
+    "electron-updater": "^6.6.2",
+    "jspdf": "^2.5.2",
+    "three": "0.160.0"
+  }
+}

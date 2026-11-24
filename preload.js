@@ -1,0 +1,19 @@
+const {contextBridge,ipcRenderer}=require('electron');
+contextBridge.exposeInMainWorld('vdbhProjects',Object.freeze({
+ changelog:()=>ipcRenderer.invoke('projects:changelog'),
+ markChangelogSeen:version=>ipcRenderer.invoke('projects:markChangelogSeen',version),
+ rename:payload=>ipcRenderer.invoke('projects:rename',payload),
+ remove:payload=>ipcRenderer.invoke('projects:remove',payload),
+ trash:()=>ipcRenderer.invoke('projects:trash'),
+ restore:payload=>ipcRenderer.invoke('projects:restore',payload),
+ quit:()=>ipcRenderer.invoke('projects:quit'),
+ list:()=>ipcRenderer.invoke('projects:list'),
+ load:id=>ipcRenderer.invoke('projects:load',id),
+ save:payload=>ipcRenderer.invoke('projects:save',payload),
+ reports:id=>ipcRenderer.invoke('projects:reports',id),
+ saveReport:payload=>ipcRenderer.invoke('projects:saveReport',payload),
+ openReport:(projectId,reportId)=>ipcRenderer.invoke('projects:openReport',{projectId,reportId}),
+ setDirty:value=>ipcRenderer.send('projects:dirty',value===true),
+ onSaveBeforeClose:callback=>{ipcRenderer.on('projects:save-before-close',()=>callback());},
+ closeAfterSave:()=>ipcRenderer.send('projects:close-after-save')
+}));

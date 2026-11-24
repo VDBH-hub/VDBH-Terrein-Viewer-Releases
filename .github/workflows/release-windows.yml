@@ -1,0 +1,56 @@
+name: Windows installer en nieuwste release
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'package.json'
+      - '.github/workflows/release-windows.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: windows-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Versie en bronbestanden controleren
+        run: node scripts/prepare-release.cjs
+      - name: Bouwonderdelen installeren
+        run: npm ci --no-audit --no-fund
+      - name: Windows-installer bouwen
+        run: npm run dist:win -- --publish never
+      - name: Bouwpakket maken
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          $files = Get-ChildItem -File | Where-Object { $_.Name -ne 'release-notes.md' }
+          Compress-Archive -Path $files.FullName -DestinationPath "dist/VDBH_Terrein_Viewer_BETA_$($version.Replace('.', '_'))_Bouwpakket.zip"
+      - name: Release volledig uploaden en als nieuwste publiceren
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          $tag = "v$version"
+          $assets = @("dist/VDBH-Terrein-Viewer-Setup-$version.exe", "dist/VDBH-Terrein-Viewer-Setup-$version.exe.blockmap", 'dist/latest.yml', "dist/VDBH_Terrein_Viewer_BETA_$($version.Replace('.', '_'))_Bouwpakket.zip")
+          foreach ($asset in $assets) { if (-not (Test-Path $asset)) { throw "Bestand ontbreekt: $asset" } }
+          gh release view $tag --json isDraft --jq .isDraft 1>release-state.txt 2>$null
+          $exists = $LASTEXITCODE -eq 0
+          if ($exists -and (Get-Content release-state.txt) -ne 'true') { throw "Release $tag is al gepubliceerd; bestaande bestanden worden niet overschreven." }
+          if (-not $exists) {
+            gh release create $tag --target $env:GITHUB_SHA --title "VDBH Terrein Viewer BETA $version" --notes-file release-notes.md --draft
+            if ($LASTEXITCODE -ne 0) { throw 'Release aanmaken mislukt.' }
+          }
+          gh release upload $tag @assets --clobber
+          if ($LASTEXITCODE -ne 0) { throw 'Upload mislukt; de release blijft concept.' }
+          gh release edit $tag --draft=false --latest
+          if ($LASTEXITCODE -ne 0) { throw 'Publiceren mislukt.' }

@@ -1,0 +1,96 @@
+{
+  "entries": [
+    {
+      "version": "0.2.68",
+      "date": "24 november 2026",
+      "changes": [
+        "Snelknoppen met passende icoontjes voor alle gereedschappen in de balk boven de 3D-viewer.",
+        "Knoppen tonen hun naam als tooltip en het actieve gereedschap licht groen op. De knoppen volgen dezelfde acties als het menu.",
+        "De gereedschapsbalk past zich aan de beschikbare breedte aan en is met het toetsenbord te bedienen. De handleiding is aangevuld."
+      ]
+    },
+    {
+      "version": "0.2.67",
+      "date": "24 november 2026",
+      "changes": [
+        "De handleiding is volledig bijgewerkt voor de huidige menubalk, projectbeheer, opmerkingen, dynamische profielen en PDF-rapporten.",
+        "Opmerkingenrapport exporteren is pas actief zodra het project minimaal één opmerking bevat. Na het verwijderen van de laatste opmerking wordt deze export uitgeschakeld.",
+        "Bestanden > Exporteren is alleen actief wanneer er opmerkingen of een geslaagde volumeberekening beschikbaar zijn. Een depotrapport blijft ook zonder opmerkingen beschikbaar na een berekening."
+      ]
+    },
+    {
+      "version": "0.2.66",
+      "date": "23 november 2026",
+      "changes": [
+        "Professioneel opmerkingenrapport met het VDBH-bedrijfslogo en compacte projectgegevens.",
+        "Overzichtstekening van het terrein en lijnwerk met noordpijl, schaalbalk en genummerde opmerkingen op de exacte locatie.",
+        "Opmerkingenregister met duidelijke kolommen voor nummer, status, opmerking en X/Y/Z. Lange teksten en tabellen lopen automatisch door op vervolgpagina’s."
+      ]
+    },
+    {
+      "version": "0.2.65",
+      "date": "23 november 2026",
+      "changes": [
+        "Nieuw: opmerkingenrapport exporteren via Bestanden > Exporteren, zonder depotberekening.",
+        "Het PDF-rapport bevat de projectgegevens, alle opmerkingen, hun status en exacte X-, Y- en Z-coördinaten.",
+        "Opmerkingenrapporten worden bij het project bewaard en zijn terug te vinden via Rapporten.",
+        "Depotrapporten blijven beschikbaar in het exportkeuzemenu na een volumeberekening."
+      ]
+    },
+    {
+      "version": "0.2.64",
+      "date": "23 november 2026",
+      "changes": [
+        "De changelogpopup toont alleen de wijzigingen van de actuele versie, ook via Help > Wat is Nieuw?.",
+        "Gereedschappen schakelen na een afgeronde actie automatisch uit: hoogtepunten, opmerkingen, profielen en boundaries.",
+        "Een lijnprofiel stopt na twee punten; een polyline-profiel na Enter, dubbelklik of Profiel afronden.",
+        "Boundary selecteren voegt één contour toe en stopt daarna. Door het gereedschap opnieuw te kiezen kun je extra contours toevoegen zonder de eerdere selectie te verliezen.",
+        "De dynamische profielkoppeling blijft werken wanneer het tekengereedschap uit staat."
+      ]
+    },
+    {
+      "version": "0.2.63",
+      "date": "23 november 2026",
+      "changes": [
+        "Opmerkingslabels tonen nu een exact ankerpunt met een korte verbindingslijn onder het label, zoals bij hoogtepunten.",
+        "Dynamische koppeling tussen het lengteprofiel en de 3D-viewer: bewegen over de grafiek toont het bijbehorende modelpunt.",
+        "Bewegen langs het actieve profieltracé in het model markeert dezelfde afstand in de profielgrafiek.",
+        "Live weergave van afstand, X/Y en hoogtes per surface; de koppeling werkt ook in het aparte 3D-venster.",
+        "De profielgrafiek wordt tijdens bewegen niet opnieuw bemonsterd; een aparte cursorlaag houdt de interactie licht."
+      ]
+    },
+    {
+      "version": "0.2.62",
+      "date": "23 november 2026",
+      "changes": [
+        "Nieuwe menubalk met Start, Bestanden, Gereedschappen en Help.",
+        "Compacte vensterindeling: de 3D-viewer blijft in beeld zonder door de hoofdpagina te scrollen. Lange lijsten scrollen binnen hun eigen paneel.",
+        "Lengteprofiel is in- en uitklapbaar en verschijnt automatisch wanneer je een profielgereedschap kiest.",
+        "Projectoverzicht met zoeken, openen, naam/nummer wijzigen, rapporten en verwijderen.",
+        "Verwijderde projecten en rapporten gaan naar de prullenbak en kunnen worden hersteld.",
+        "Afsluiten via Start gebruikt de bestaande melding voor niet-opgeslagen wijzigingen."
+      ]
+    },
+    {
+      "version": "0.2.61",
+      "date": "23 november 2026",
+      "changes": [
+        "Projecten opslaan en opnieuw openen, inclusief modellen, ondergronden, metingen, depotgrenzen, kleuren en camera-instellingen.",
+        "Opmerkingen op het terrein plaatsen, wijzigen, verwijderen en afhandelen; zichtbaar in de hoofdviewer en in het aparte venster.",
+        "Opmerkingen kunnen als bijlage worden opgenomen in de PDF.",
+        "Nieuwe PDF-rapporten worden automatisch per project bewaard en zijn later opnieuw te openen.",
+        "Melding bij niet-opgeslagen wijzigingen; opslaan met Ctrl+S of Opslaan en afsluiten.",
+        "Changelog verschijnt eenmaal bij de eerste start van iedere versie en blijft bereikbaar via Wat is er nieuw? naast Handleiding."
+      ]
+    },
+    {
+      "version": "0.2.60",
+      "date": "20 november 2026",
+      "changes": [
+        "Experimentele import van Trimble SVD-terreinmodellen en SVL-ondergronden via Bestand importeren.",
+        "Meerdere bestanden tegelijk importeren en dubbele SVD-tegeldriehoeken verwijderen.",
+        "LandXML-coördinaten correct ingelezen en inactieve driehoeken overgeslagen."
+      ]
+    }
+  ]
+}
