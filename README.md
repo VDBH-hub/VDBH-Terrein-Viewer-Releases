@@ -1,27 +1,34 @@
 # VDBH Terrein Viewer
 
-Officiële updates en bronbestanden voor de VDBH Terrein Viewer.
+Officiële Windows-app voor terreinmodellen, metingen en opmerkingen.
 
-## Nieuwste versie: BETA 0.2.69
+## Nieuwste versie: 1.0.1
 
 [Download de nieuwste Windows-installer](https://github.com/VDBH-hub/VDBH-Terrein-Viewer-Releases/releases/latest)
 
-Deze versie bevat snelknoppen voor alle gereedschappen, lokaal projectbeheer,
-opmerkingen met exacte locaties, dynamische profielen en professionele PDF-rapporten.
+- DXF, LandXML en ondersteunde Trimble SVD/SVL-bestanden importeren.
+- Terreinmodellen in 3D bekijken, punten meten, profielen maken en volumes berekenen.
+- Opmerkingen met exacte locaties in het model plaatsen en lokaal per project bewaren.
+- Professionele opmerkingenrapporten als PDF exporteren.
+- Complete projecten met opmerkingen uitwisselen via één `.vdbhproject`-bestand.
+- Een ontvangen project direct via dubbelklik openen in de viewer.
 
-## Installeren
+Installeer de Setup.exe uit Releases. De bestaande lokale projecten en rapporten
+blijven beschikbaar bij een update. De installer registreert de bestandsextensie.
 
-Download de Setup.exe bij Releases. Bestaande opgeslagen projecten en rapporten
-blijven behouden bij een update. De ZIP bevat het bouwpakket.
+## Handleiding en voorbeeld
+
+Open in de app **Help > Handleiding (F1)**. De ZIP bevat ook een losse HTML- en
+teksthandleiding en een fictief voorbeeldproject zonder klantgegevens.
 
 ## Zelf bouwen
 
-Pak het bouwpakket uit in een nieuwe map en start `build-windows.bat` op Windows.
-De handleiding vind je in de app via Help > Handleiding (F1).
+Pak het bouwpakket uit en start `build-windows.bat` op Windows. De lokale build
+publiceert niets online. De gemaakte installer staat in `dist`.
 
-## Publiceren
+## Releases
 
-Een wijziging van `package.json` op `main` start de Windows-build. De workflow
-controleert de versie en changelog, bouwt de installer en uploadt Setup.exe,
-blockmap, latest.yml en het bouwpakket. De release wordt pas gepubliceerd nadat
-alle bestanden zijn geüpload. Een reeds gepubliceerde versie wordt niet overschreven.
+Een versie-update op `main` start de Windows-build. De workflow controleert
+versie en changelog, bouwt de installer en uploadt Setup.exe, blockmap,
+latest.yml en het bouwpakket. De release wordt pas gepubliceerd wanneer alle
+bestanden zijn geüpload. Een reeds gepubliceerde versie wordt niet overschreven.

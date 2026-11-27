@@ -1,11 +1,11 @@
 @echo off
 setlocal EnableExtensions
 cd /d "%~dp0"
-set "APP_VERSION=0.2.69"
-title VDBH Terrein Viewer BETA %APP_VERSION% - Windows installer bouwen
+set "APP_VERSION=1.0.1"
+title VDBH Terrein Viewer %APP_VERSION% - Windows installer bouwen
 
 echo ==================================================
-echo   VDBH Terrein Viewer BETA %APP_VERSION% - Windows installer bouwen
+echo   VDBH Terrein Viewer %APP_VERSION% - Windows installer bouwen
 echo ==================================================
 echo.
 
@@ -46,7 +46,7 @@ set "ATTEMPT=1"
 :build_retry
 echo.
 echo Windows-installer bouwen - poging %ATTEMPT% van 3...
-call npm run dist:win
+call npm run dist:win -- --publish never
 if not errorlevel 1 goto success
 if "%ATTEMPT%"=="3" goto build_error
 echo.

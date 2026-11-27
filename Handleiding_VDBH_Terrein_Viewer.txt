@@ -1,0 +1,198 @@
+VDBH TERREIN VIEWER - HANDLEIDING 1.0.1
+Bijgewerkt op 27 november 2026
+
+Opmerkingen delen: PDF of interactief 3D-project?
+
+Je kunt gemaakte opmerkingen exporteren. Kies de vorm die past bij wat je collega ermee wil doen:
+
+Doel | Menukeuze | Wat ontvangt de collega?
+Een leesbaar rapport delen of afdrukken | Bestanden → Exporteren → Opmerkingenrapport (PDF) | Een PDF met overzichtstekening, genummerde opmerkingen, status en coördinaten.
+Opmerkingen bekijken in een draaibaar 3D-model | Bestanden → Project exporteren | Eén .vdbhproject-bestand met de modellen en opmerkingen. Dubbelklik op het bestand om het model en de opmerkingen direct te openen. Ook beschikbaar via Bestanden → Project importeren.
+
+Voor het uitwisselen van een 3D-project hebben beide gebruikers versie 0.2.72 of nieuwer nodig. Een PDF open je in een PDF-lezer; een .vdbhproject-bestand open je in de Terrein Viewer.
+
+Snel aan de slag: uitvoerder → collega
+
+1. Open een lokaal project of importeer een terreinmodel via Bestanden → Importeren.
+2. Kies Gereedschappen → Meten & Profielen → Opmerking plaatsen, of klik het bijbehorende icoon boven de viewer aan.
+3. Klik op het model, voer je opmerking in en kies Bewaren. Herhaal dit voor volgende opmerkingen.
+4. Druk Escape om het gereedschap uit te zetten. Gebruik Ctrl+S om lokaal te bewaren.
+5. Deel een rapport via Bestanden → Exporteren → Opmerkingenrapport (PDF), of deel het complete 3D-project via Bestanden → Project exporteren.
+6. De collega dubbelklikt op het ontvangen .vdbhproject-bestand; de VDBH Terrein Viewer opent het model en de opmerkingen direct. Draai en zoom het model en gebruik Tonen bij een opmerking om naar die locatie te gaan.
+
+1. Indeling en menubalk
+
+De 3D Surface Viewer staat centraal. Bovenaan vind je Start, Bestanden, Gereedschappen en Help. In de projectbalk staan de projectnaam, het projectnummer en de knoppen voor openen, opslaan en rapporten.
+
+Het linkerpaneel Tekeningen bevat surfaces, ondergronden, kaartlagen en opmerkingen. Het rechterpaneel Hoogte & grondverzet bevat de rekeninstellingen en resultaten. Op kleinere schermen gebruik je Lagen en Volumes om deze panelen te tonen.
+
+Met Profiel boven de viewer toon of verberg je het profielpaneel. Onderaan staan de projectstatus en meldingen over de uitgevoerde actie.
+
+2. Een project maken, openen en bewaren
+
+1. Kies Start → Nieuw project. Vul een projectnaam en eventueel een projectnummer in.
+2. Importeer de modellen en voeg opmerkingen, meetpunten of profielen toe.
+3. Kies Start → Project opslaan, de knop Project opslaan of Ctrl+S.
+4. Open het project later via Start → Project openen of de knop Project openen.
+
+Opslaan bewaart de werkinhoud lokaal op deze computer. Voor een collega gebruik je Project exporteren. De oorspronkelijke DXF/XML/SVD/SVL-bestanden hoef je bij een opgeslagen project niet opnieuw te laden.
+
+Bij het verlaten van een project met niet-opgeslagen wijzigingen kun je deze eerst bewaren, doorgaan zonder bewaren of annuleren. Sluit de app via Start → Afsluiten.
+
+3. Projectoverzicht en verwijderen
+
+Via Start → Projectoverzicht beheer je de opgeslagen projecten. Je kunt een project openen, naam of nummer wijzigen, de rapporten bekijken of het project verwijderen.
+
+Verwijderen plaatst het project met zijn opgeslagen rapporten in de prullenbak. Vanuit de prullenbak kun je het project herstellen. Een hersteld project verschijnt weer in het projectoverzicht.
+
+De knop Alles wissen boven de 3D-viewer wist de huidige werkinhoud, inclusief modellen, opmerkingen, meetpunten en profielen. Dit verwijdert het opgeslagen project niet uit het projectoverzicht. Als je de lege werkinhoud daarna opslaat, wordt die leegte wel in het actieve project bewaard.
+
+4. Modellen en ondergronden importeren
+
+Kies Bestanden → Importeren voor DXF, LandXML, Trimble SVD of SVL. Meerdere bestanden tegelijk selecteren is mogelijk. Wacht tot de import klaar is en het model in beeld staat.
+
+- LandXML en ondersteunde DXF-terreinobjecten leveren meetbare surfaces en eventueel lijnwerk.
+- SVD wordt een meetbaar terreinmodel.
+- SVL wordt een 2D-ondergrond zonder meethoogtes. SVL-teksten worden overgeslagen.
+
+De Trimble-import is experimenteel en getest met GCS900 v13-bestanden. Een onbekende indeling wordt gemeld. Met Bestanden → Ondergrond importeer je DXF-lijnwerk als ondergrond.
+
+Een ontvangen .vdbhproject open je via Bestanden → Project importeren, niet via de import voor bronbestanden.
+
+5. Navigeren en de weergave aanpassen
+
+Sleep met de linkermuisknop om te draaien, sleep met de rechtermuisknop om te verschuiven en gebruik het muiswiel om te zoomen. Met Model centreren breng je de geladen geometrie weer in beeld.
+
+Gebruik Boven, Voor, Links en Iso voor vaste aanzichten. 3D toont de normale modelweergave. Verschilweergave is bedoeld om hoogteverschillen tussen surfaces te beoordelen.
+
+Met Triangles toon je de triangulatie. Via Apart venster open je de viewer groter of op een tweede scherm. Opmerkingen en de dynamische profielkoppeling zijn ook in dat venster beschikbaar.
+
+6. Surfaces, rainbow en kaartlagen
+
+In Tekeningen staan de geïmporteerde surfaces met hun kleur, transparantieschuif en verwijderknop. Nieuwe surfaces starten met Rainbow op basis van hoogte aan. Per surface kun je rainbow uitzetten en Kleurverschil per hoogte aanpassen. Een opgeslagen project behoudt zijn bewaarde kleurinstellingen.
+
+Ondergronden hebben eigen instellingen voor zichtbaarheid, kleur en transparantie. Een ondergrond is bedoeld als tekening achter het model; gebruik een meetbare surface voor hoogtemetingen.
+
+Raster en Luchtfoto kun je aan- en uitzetten. De schuif voor de luchtfoto verschijnt zodra deze aanstaat. Voor het ophalen van een luchtfoto is een internetverbinding nodig.
+
+7. Icoonknoppen en actieve gereedschappen
+
+In de balk 3D Surface Viewer staan icoonknoppen voor alle gereedschappen. Houd de muis boven een icoon voor de naam. De knoppen voeren dezelfde acties uit als het menu Gereedschappen.
+
+Een groen gemarkeerde keuze blijft actief na een geplaatste opmerking, meetpunt of afgerond profiel. Klik opnieuw op dezelfde icoonknop, kies een ander gereedschap of druk Escape om te stoppen.
+
+Grijze knoppen zijn tijdelijk niet beschikbaar, bijvoorbeeld tijdens importeren of exporteren. Boundary sluiten is in de icoonbalk beschikbaar wanneer Boundary tekenen actief is. Verwijderknoppen voeren direct hun betreffende wisactie uit.
+
+8. Opmerkingen plaatsen en beheren
+
+1. Kies Gereedschappen → Meten & Profielen → Opmerking plaatsen of het opmerkingenicoon.
+2. Klik op het model op de locatie waar de opmerking hoort.
+3. Voer de tekst in, kies Open of Afgehandeld en klik Bewaren.
+4. Klik voor een volgende opmerking opnieuw op het model. Druk Escape zodra je klaar bent.
+
+Het punt onder het label markeert de exacte XYZ-locatie. In de 3D-viewer is oranje een open opmerking en groen een afgehandelde opmerking. De opmerkingenlijst staat links in Tekeningen.
+
+Gebruik Tonen om het beeld op een opmerking te centreren. Via Wijzigen pas je tekst of status aan, of verwijder je de opmerking. Met Labels: aan/uit toon of verberg je de tekstlabels. Sla wijzigingen lokaal op met Ctrl+S en exporteer ze opnieuw wanneer je ze wilt delen.
+
+Opmerkingen exporteren kan op twee manieren: als PDF-rapport voor lezen en afdrukken, of als .vdbhproject met het model voor interactief bekijken in 3D. Zie hoofdstukken 12 en 13.
+
+9. Hoogtepunten meten
+
+Kies Gereedschappen → Meten & Profielen → Hoogtepunt en klik op een meetbare surface. De markering blijft in het model staan; de Z-waarde staat bij Gemeten hoogtepunt (Z).
+
+Het gereedschap blijft actief voor volgende punten. Stop met dezelfde knop, een ander gereedschap of Escape. Hoogtepunten verwijderen verwijdert alle hoogteannotaties.
+
+Meetpunten worden lokaal in het project bewaard en gaan mee in een .vdbhproject-export. De tabel van het opmerkingenrapport bevat de opmerkingen; afzonderlijke hoogtepunten worden daar niet als meetpuntenlijst aan toegevoegd.
+
+10. Profielen maken en dynamisch bekijken
+
+Kies Gereedschappen → Meten & Profielen → Lijnprofiel en klik twee verschillende punten. Het profiel wordt opgeslagen. De volgende klik start een nieuw profiel; tot die klik blijft het laatst gemaakte profiel zichtbaar.
+
+Met Polyline-profiel plaats je meerdere knikpunten. Rond af met Enter, een dubbelklik of Profiel opslaan. Klik daarna voor een nieuw tracé of schakel het gereedschap uit.
+
+Het profielpaneel opent bij het kiezen van het gereedschap. Met Profiel boven de viewer toon of verberg je het. Klik op een opgeslagen profiel om dit opnieuw te bekijken.
+
+Beweeg de muis over de profielgrafiek: de overeenkomstige locatie verschijnt in het model. Beweeg langs het actieve profieltracé in het model: de positie wordt in de grafiek getoond. De afstand volgt de knikken van het tracé. De koppeling werkt ook als het tekengereedschap uitstaat en vanuit het aparte 3D-venster.
+
+Profielen verwijderen wist de opgeslagen en actieve profielen. Profielen gaan mee in een 3D-projectexport; profielgrafieken worden niet opgenomen in het opmerkingenrapport.
+
+11. Boundaries en volumes
+
+Open zo nodig het paneel Hoogte & grondverzet via Volumes. Kies Depotvolume of Twee surfaces vergelijken en de bijbehorende surfaces.
+
+Via Gereedschappen → Boundary & Selectie → Boundary tekenen klik je minimaal drie verschillende hoekpunten rond het gebied. Sluit af met Boundary sluiten, Enter of een dubbelklik. Na een geldige afsluiting start de berekening. Het gereedschap blijft actief; een volgende klik begint een nieuwe begrenzing en vervangt de vorige.
+
+Met Boundary selecteren kies je contours uit geïmporteerd lijnwerk. Klik extra contours aan om meerdere gebieden toe te voegen. Een al gekozen contour wordt niet dubbel toegevoegd. Gebruik Bereken volume voor de berekening en Selectie wissen om de selectie en actieve begrenzing te verwijderen.
+
+Controleer resultaten, oppervlaktes en materiaalkeuzes. Na een geslaagde berekening is het Depotrapport (PDF) beschikbaar via Bestanden → Exporteren en via de PDF-knop bij de berekening.
+
+12. Opmerkingen exporteren als PDF
+
+1. Plaats minimaal één opmerking in het project.
+2. Kies Bestanden → Exporteren.
+3. Kies Opmerkingenrapport (PDF).
+4. Geef zo nodig een projectnaam op. Het rapport wordt gemaakt, bij het project bewaard en als PDF aangeboden om op te slaan.
+5. Verstuur de PDF naar je collega of gebruik deze voor de rapportage.
+
+Het rapport bevat het VDBH-logo, projectgegevens, een overzichtstekening met duidelijke modelranden en kniklijnen, noordpijl, schaalbalk en genummerde opmerkingspunten. De tabel toont de tekst, status en exacte X-, Y- en Z-coördinaten.
+
+Iedere opmerking krijgt in de PDF een eigen kleur voor vlak, punt, nummer en tabelregel. Deze kleur verwijst naar het opmerkingsnummer; de status blijft apart in de tabel staan. De aangeklikte TIN-driehoek wordt gemarkeerd. Verbonden driehoeken kleuren mee als alle hoekpunten maximaal 1 mm van de Z-waarde van het opmerkingspunt afwijken. Bij afschot kan daarom alleen de aangeklikte driehoek gekleurd blijven. Meerdere opmerkingen op hetzelfde vlak worden met kleurstroken weergegeven.
+
+De opmerkingenexport is grijs zolang er geen opmerkingen zijn. Bestanden → Exporteren is beschikbaar als er opmerkingen of een geslaagde volumeberekening zijn. Voor een opmerkingenrapport is geen volumeberekening nodig. Voor Depotrapport (PDF) is die berekening wel nodig; daarbij kun je opmerkingen als bijlage toevoegen.
+
+Een PDF is een vaste rapportweergave. Om de opmerkingen in een draaibaar model te bekijken, gebruik je de 3D-projectexport hieronder.
+
+13. Opmerkingen met het model exporteren en in 3D openen
+
+Bij de uitvoerder:
+
+1. Open het juiste project en controleer de opmerkingen.
+2. Kies Bestanden → Project exporteren.
+3. Geef zo nodig een projectnaam op en kies waar je het .vdbhproject-bestand wilt bewaren.
+4. Stuur dit ene bestand naar de collega, bijvoorbeeld per e-mail of via een gedeelde map.
+
+Het bestand bevat de actuele surfaces, lijnwerk, ondergrondgeometrie, opmerkingen met tekst, status en exacte XYZ-locaties, meetpunten, profielen, begrenzingen, opgeslagen berekeningsgegevens en weergave-instellingen. Ook nog niet lokaal opgeslagen wijzigingen gaan mee. Exporteren maakt een deelbaar bestand; bewaar je lokale werk daarnaast met Ctrl+S.
+
+Bij de ontvanger:
+
+1. Installeer Terrein Viewer 0.2.74 of nieuwer voor openen via dubbelklik. Bestanden uit 0.2.72 en 0.2.73 zijn compatibel. Bij oudere viewers vanaf 0.2.72 gebruik je Bestanden → Project importeren.
+2. Dubbelklik op het ontvangen .vdbhproject-bestand. Vanaf versie 0.2.74 opent de viewer het model en de opmerkingen direct, ook als het programma al openstaat. Je hoeft geen project aan te maken of eerst handmatig te importeren. Bestanden → Project importeren blijft beschikbaar.
+3. Als de viewer al openstaat: handel eventuele niet-opgeslagen wijzigingen in het huidige project af. Tijdens een lopende import, export of dialoog wacht het bestand tot de viewer klaar is.
+4. Het model opent met de opmerkingen in 3D en wordt automatisch als nieuwe lokale projectkopie bewaard. De opmerkingenlijst en labels worden getoond en het beeld wordt op de eerste opmerking gericht.
+5. Draai, verschuif en zoom het model. Open links de opmerkingenlijst en klik Tonen om een locatie te bekijken. Via Wijzigen kun je een opmerking aanvullen of afhandelen.
+
+De oorspronkelijke DXF/XML/SVD/SVL-bronbestanden zijn niet nodig om het ontvangen project te openen. Eerder gemaakte PDF-rapporten gaan niet mee; de ontvanger kan nieuwe rapporten genereren. Een luchtfoto wordt zo nodig opnieuw online opgehaald.
+
+Om wijzigingen terug te sturen sla je het project lokaal op en kies je opnieuw Project exporteren. Elke import maakt een aparte kopie: bestaande projecten worden niet overschreven en opmerkingen worden niet automatisch samengevoegd. De export is een momentopname; een reeds verzonden bestand verandert niet mee met later werk.
+
+In het bouwpakket staat Voorbeeld_3D_Project.vdbhproject om deze werkwijze te proberen.
+
+14. Rapporten terugvinden
+
+Gebruik Rapporten in de projectbalk of Start → Projectoverzicht → Rapporten. Selecteer het project en klik PDF openen.
+
+Dit overzicht bevat al gemaakte PDF's. Een nieuw rapport maak je via Bestanden → Exporteren. Een ontvangen .vdbhproject open je via Project importeren, niet via het rapportenoverzicht.
+
+Lokale projecten en hun rapporten blijven beschikbaar na een programma-update. Een nieuw gegenereerde PDF gebruikt de huidige rapportopmaak; oudere PDF's blijven zoals ze waren.
+
+15. Veelvoorkomende vragen
+
+- Mijn collega ziet alleen een bovenaanzicht. Een PDF bevat de overzichtstekening. Deel een .vdbhproject als de collega zelf in 3D moet kunnen draaien en zoomen.
+- Opmerkingenrapport is grijs. Plaats eerst een opmerking. Zonder opmerkingen kun je wel een compleet 3D-project exporteren.
+- Opmerkingen staan niet in beeld. Open Lagen/Tekeningen, controleer Labels: aan en kies Tonen bij een opmerking. Model centreren brengt het terrein weer in beeld.
+- Ik plaats onbedoeld nieuwe punten. Het gekozen gereedschap blijft actief. Druk Escape of klik de actieve icoonknop opnieuw aan.
+- Een gekleurd vlak blijft klein in de PDF. Alleen verbonden driehoeken binnen de afgesproken Z-marge van 1 mm kleuren mee. Bij afschot kan die selectie beperkt zijn.
+- Een ontvangen project opent niet. Installeer 0.2.74 of nieuwer voor dubbelklik of gebruik Bestanden → Project importeren vanaf versie 0.2.72. Als Windows naar een programma vraagt: kies bij Openen met de nieuw geïnstalleerde VDBH Terrein Viewer. Controleer of het bestand .vdbhproject is. Beschadigde, onbekende of te grote projectbestanden worden geweigerd; vraag zo nodig om een nieuwe export.
+
+16. Help en toetsenbordbediening
+
+Toets | Actie
+F1 | Help → Handleiding openen.
+Ctrl+S | Het actieve project lokaal opslaan.
+Escape | Een actief gereedschap uitschakelen of een geopend menu of dialoog sluiten.
+Enter | Een polyline-profiel of boundary tijdens het tekenen afronden.
+F10 | De menubalk openen; navigeer daarna met de pijltjestoetsen.
+Alt+S / Alt+B / Alt+G / Alt+H | Start / Bestanden / Gereedschappen / Help openen.
+Tab / pijltjestoetsen | Knoppen bereiken en tussen icoonknoppen navigeren. Enter of spatie bedient de gekozen knop.
+
+Help → Wat is Nieuw? toont de wijzigingen van de huidige versie. Deze verschijnen ook eenmaal automatisch na een versie-update. Je vindt deze handleiding daarnaast als HTML en tekstbestand in het bouwpakket.

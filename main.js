@@ -2,6 +2,11 @@ const { app, BrowserWindow, shell, Menu, dialog } = require('electron');
 const path = require('node:path');
 const {ipcMain}=require('electron');
 const {ProjectRepository,atomic}=require('./project-repository.cjs');
+const {encodeTransfer,readTransfer,suggestedName}=require('./project-transfer.cjs');
+const {ProjectOpenQueue}=require('./project-open.cjs');
+const projectOpenQueue=new ProjectOpenQueue();
+let rendererFilesReady=false;
+const launchDirectory=()=>typeof process.cwd==='function'?process.cwd():__dirname;
 let projectRepository;
 let projectDirty=false;
 const { autoUpdater } = require('electron-updater');
@@ -13,7 +18,12 @@ let updateCheckStarted = false;
 let isQuitting = false;
 let closeConfirmationOpen = false;
 
+function notifyProjectFiles(){
+ if(rendererFilesReady&&projectOpenQueue.length&&mainWindow&&!mainWindow.isDestroyed())mainWindow.webContents.send('projects:open-file-available');
+}
+function queueProjectFiles(args,cwd){if(projectOpenQueue.enqueue(args,cwd||launchDirectory()))notifyProjectFiles();}
 function createWindow() {
+  rendererFilesReady=false;
   mainWindow = new BrowserWindow({
     width: 1600,
     height: 1000,
@@ -64,6 +74,7 @@ function createWindow() {
   const writeRendererLog = (label, detail) => {
     try { fs.appendFileSync(logPath, `[${new Date().toISOString()}] ${label}: ${detail}\n`); } catch (_) {}
   };
+  mainWindow.webContents.on('did-start-loading',()=>{rendererFilesReady=false;});
   mainWindow.webContents.on('console-message', (_event, level, message, line, sourceId) => {
     if (level >= 2) writeRendererLog('Renderer console error', `${message} (line ${line}, ${sourceId})`);
   });
@@ -77,7 +88,7 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, 'VDBH_Terrein_Viewer.html'));
   // Toon altijd de versie uit package.json; het versielabel hoeft nooit meer handmatig aangepast te worden.
   mainWindow.webContents.once('did-finish-load', () => {
-    const versionLabel = `VERSIE BETA ${app.getVersion()}`;
+    const versionLabel = `VERSIE ${app.getVersion()}`;
     mainWindow.webContents.executeJavaScript(`(() => { const el = document.getElementById('appVersion'); if (el) el.textContent = ${JSON.stringify(versionLabel)}; })()`)
       .catch((error) => console.error('[VDBH] Versienummer kon niet in de interface worden gezet:', error));
   });
@@ -176,6 +187,20 @@ function registerProjectStorage(){
   rename:p=>projectRepository.rename(p),remove:p=>projectRepository.remove(p),
   trash:()=>projectRepository.trash(),restore:p=>projectRepository.restore(p),
   quit:()=>{mainWindow.close();return true;},
+  readyForProjectFiles:()=>{rendererFilesReady=true;return {pending:projectOpenQueue.length};},
+  takeOpenProjectFile:()=>projectOpenQueue.take(),
+  exportProject:async payload=>{
+   const bytes=await encodeTransfer(payload,app.getVersion());
+   const result=await dialog.showSaveDialog(mainWindow,{title:'3D-project met opmerkingen exporteren',defaultPath:suggestedName(payload.name,payload.number),filters:[{name:'VDBH 3D-project',extensions:['vdbhproject']}],properties:['showOverwriteConfirmation','createDirectory']});
+   if(result.canceled||!result.filePath)return null;
+   const file=/\.vdbhproject$/i.test(result.filePath)?result.filePath:result.filePath+'.vdbhproject';
+   await atomic(file,bytes);return {fileName:path.basename(file),sizeBytes:bytes.length};
+  },
+  importProject:async()=>{
+   const result=await dialog.showOpenDialog(mainWindow,{title:'3D-project met opmerkingen importeren',filters:[{name:'VDBH 3D-project',extensions:['vdbhproject']}],properties:['openFile']});
+   if(result.canceled||!result.filePaths?.length)return null;
+   const value=await readTransfer(result.filePaths[0]);return {...value,fileName:path.basename(result.filePaths[0])};
+  },
   list:()=>projectRepository.list(),load:id=>projectRepository.read(id),save:p=>projectRepository.save(p),
   reports:id=>projectRepository.reports(id),saveReport:p=>projectRepository.saveReport(p),
   openReport:async p=>{const file=await projectRepository.reportPath(p.projectId,p.reportId);const error=await shell.openPath(file);if(error)throw Error(error);return true;}
@@ -184,7 +209,9 @@ function registerProjectStorage(){
  ipcMain.on('projects:close-after-save',event=>{trusted(event);if(!projectDirty){isQuitting=true;mainWindow.close();}});
 }
 if(!app.requestSingleInstanceLock()){app.quit();}else{
-app.on('second-instance',()=>{if(mainWindow){if(mainWindow.isMinimized())mainWindow.restore();mainWindow.focus();}});
+queueProjectFiles(process.argv||[],launchDirectory());
+app.on('open-file',(event,file)=>{event.preventDefault();queueProjectFiles([file],launchDirectory());});
+app.on('second-instance',(_event,argv,cwd)=>{queueProjectFiles(argv||[],cwd);if(mainWindow){if(mainWindow.isMinimized())mainWindow.restore();mainWindow.show();mainWindow.focus();}});
 app.whenReady().then(() => {
   registerProjectStorage();
   Menu.setApplicationMenu(null);

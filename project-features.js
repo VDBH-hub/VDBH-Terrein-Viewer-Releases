@@ -19,7 +19,31 @@
    this.api?.onSaveBeforeClose(()=>this.action(async()=>{if(await this.save())this.api.closeAfterSave();}));
    if(!this.api){this.status.textContent='Projectopslag is beschikbaar in de Windows-app.';for(const id of ['projectSave','projectOpen','projectNew','projectReports'])document.getElementById(id).disabled=true;}
    this.renderComments();this.updateStatus();
-   if(this.api)this.action(()=>this.showChangelog(true));
+   this.fileOpenPending=false;this.fileOpenProcessing=false;this.fileOpenStartup=true;this.fileOpenTimer=null;
+   this.api?.onOpenProjectFile?.(()=>{this.fileOpenPending=true;return this.processOpenProjectFiles();});
+  }
+  async startFileOpening(){
+   if(!this.api)return;
+   try{
+    const ready=await this.api.readyForProjectFiles?.();
+    if(ready?.pending||this.fileOpenPending){this.fileOpenStartup=false;this.fileOpenPending=true;await this.processOpenProjectFiles();}
+    else await this.showChangelog(true);
+   }finally{this.fileOpenStartup=false;if(this.fileOpenPending)this.processOpenProjectFiles();}
+  }
+  scheduleProjectFile(){
+   if(this.fileOpenTimer!==null)return;
+   this.fileOpenTimer=setTimeout(()=>{this.fileOpenTimer=null;return this.processOpenProjectFiles();},250);
+  }
+  async processOpenProjectFiles(){
+   if(!this.api?.takeOpenProjectFile||!this.fileOpenPending||this.fileOpenProcessing)return;
+   if(this.fileOpenStartup||this.busy||this.reportBusy||this.ctx.importBusy?.()||document.querySelector?.('dialog[open],#helpOverlay.open')){this.scheduleProjectFile();return;}
+   this.fileOpenProcessing=true;
+   try{
+    const value=await this.lock(()=>this.api.takeOpenProjectFile());
+    if(!value){this.fileOpenPending=false;return;}
+    await this.openTransferredProject(value,true);
+   }catch(error){this.ctx.message('Projectbestand openen mislukt: '+error.message);}
+   finally{this.fileOpenProcessing=false;if(this.fileOpenPending)this.scheduleProjectFile();}
   }
   async action(fn){try{return await fn();}catch(e){this.ctx.message('Actie mislukt: '+e.message);return false;}}
   updateStatus(){if(!this.api)return;this.status.textContent=(this.project?'Project: '+this.project.name:'Nog geen opgeslagen project')+(this.dirty?' · Niet opgeslagen':' · '+(this.project?'Opgeslagen':'Kies een naam en sla op'));}
@@ -43,8 +67,8 @@
     document.body.appendChild(dialog);dialog.showModal();dialog.querySelector('input,textarea,button')?.focus();
    });
   }
-  async projectDetails(){
-   const r=await this.form('Project opslaan','<p>Bewaar de geladen modellen, ondergronden, metingen en opmerkingen samen.</p><label>Projectnaam<input name="name" required maxlength="160" value="'+h(this.name.value)+'"></label><label>Projectnummer<input name="number" maxlength="80" value="'+h(this.number.value)+'"></label>',[{value:'cancel',label:'Annuleren'},{submit:true,label:'Opslaan',primary:true}]);
+  async projectDetails(title='Project opslaan',description='Bewaar de geladen modellen, ondergronden, metingen en opmerkingen samen.',confirmLabel='Opslaan'){
+   const r=await this.form(title,'<p>'+h(description)+'</p><label>Projectnaam<input name="name" required maxlength="160" value="'+h(this.name.value)+'"></label><label>Projectnummer<input name="number" maxlength="80" value="'+h(this.number.value)+'"></label>',[{value:'cancel',label:'Annuleren'},{submit:true,label:confirmLabel,primary:true}]);
    if(!r?.fields)return false;this.name.value=r.fields.name;this.number.value=r.fields.number;return true;
   }
   async save(){
@@ -54,6 +78,41 @@
     const state=this.ctx.capture(this.comments);root.VDBHProjectState.validateState(state);
     const p=await this.api.save({id:this.project?.id||null,name:this.name.value.trim(),number:this.number.value.trim(),expectedUpdatedAt:this.project?.updatedAt,state});
     this.project=p;this.clean();this.ctx.message('Project “'+p.name+'” opgeslagen.');return true;
+   });
+  }
+  async exportProject(){
+   if(!this.api)return false;
+   if(!this.name.value.trim()&&!await this.projectDetails('Project exporteren','Geef een projectnaam op voor het 3D-project dat je met je collega wilt delen.','Verder'))return false;
+   return this.lock(async()=>{
+    const state=this.ctx.capture(this.comments);root.VDBHProjectState.validateState(state);
+    const result=await this.api.exportProject({name:this.name.value.trim(),number:this.number.value.trim(),state});
+    if(!result)return false;
+    this.ctx.message('3D-project geëxporteerd: '+result.fileName+'. Stuur dit bestand naar de ontvanger; dubbelklik op het bestand om het direct in de VDBH Terrein Viewer te openen.');return true;
+   });
+  }
+  async importProject(){
+   if(!this.api)return false;
+   const value=await this.lock(()=>this.api.importProject());if(!value)return false;
+   return this.openTransferredProject(value);
+  }
+  async openTransferredProject(value,direct=false){
+   root.VDBHProjectState.validateState(value.state);
+   if(!await this.mayLeave())return false;
+   return this.lock(async()=>{
+    const rollback=this.ctx.capture(this.comments);
+    let saved;
+    try{
+     await this.ctx.restore(value.state);
+     // Always create an independent local copy; incoming IDs cannot overwrite a project.
+     saved=await this.api.save({name:value.name,number:value.number,state:value.state});
+    }catch(error){
+     try{await this.ctx.restore(rollback);}catch(restoreError){this.ctx.message('Herstel van het vorige model mislukt: '+restoreError.message);}
+     this.comments=structuredClone(rollback.comments);this.renderComments();this.rebuildMarkers();throw error;
+    }
+    this.comments=structuredClone(value.state.comments);this.project=saved;this.name.value=saved.name;this.number.value=saved.number;
+    this.renderComments();this.rebuildMarkers();this.clean();
+    if(direct){this.showLabels=true;document.getElementById('toggleCommentLabels').textContent='Labels: aan';this.ctx.revealComments?.();if(this.comments.length)this.ctx.focus(this.comments[0].point);}
+    this.ctx.message('3D-project “'+saved.name+'” als nieuwe lokale kopie geopend, met '+this.comments.length+' opmerking(en). Draai en zoom het model; gebruik Tonen bij een opmerking om naar de locatie te gaan.');return true;
    });
   }
   async mayLeave(){
@@ -264,7 +323,7 @@
    if(automatic&&!news.showAutomatically)return;
    const latest=news.entries.find(entry=>entry.version===news.version)||news.entries[0];
    const visibleEntries=latest?[latest]:[];
-   const body='<p>Nieuw in VDBH Terrein Viewer. Deze melding verschijnt eenmaal per versie.</p>'+visibleEntries.map(entry=>'<section class="project-news"><h3>BETA '+h(entry.version)+' <small>'+h(entry.date||'')+'</small></h3><ul>'+entry.changes.map(c=>'<li>'+h(c)+'</li>').join('')+'</ul></section>').join('');
+   const body='<p>Nieuw in VDBH Terrein Viewer. Deze melding verschijnt eenmaal per versie.</p>'+visibleEntries.map(entry=>'<section class="project-news"><h3>Versie '+h(entry.version)+' <small>'+h(entry.date||'')+'</small></h3><ul>'+entry.changes.map(c=>'<li>'+h(c)+'</li>').join('')+'</ul></section>').join('');
    const shown=this.form('Wat is er nieuw?',body,[{value:'close',label:'Sluiten',primary:true}]);
    // Mark after rendering, not before fetching; a failed status write is visible and retryable.
    if(this.api)try{await this.api.markChangelogSeen(news.version);}catch(e){this.ctx.message('Wijzigingen geopend; de eenmalige melding kon niet worden onthouden: '+e.message);}

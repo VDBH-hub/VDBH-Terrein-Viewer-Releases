@@ -1,6 +1,6 @@
 {
   "name": "vdbh-terrein-viewer",
-  "version": "0.2.69",
+  "version": "1.0.1",
   "description": "VDBH Terrein Viewer",
   "main": "main.js",
   "author": "VDBH",
@@ -31,7 +31,9 @@
       "changelog.json",
       "desktop-layout.js",
       "profile-link.js",
-      "comments-report.js"
+      "comments-report.js",
+      "project-transfer.cjs",
+      "project-open.cjs"
     ],
     "directories": {
       "buildResources": ".",
@@ -64,6 +66,15 @@
         "owner": "VDBH-hub",
         "repo": "VDBH-Terrein-Viewer-Releases",
         "releaseType": "release"
+      }
+    ],
+    "fileAssociations": [
+      {
+        "ext": "vdbhproject",
+        "name": "VDBH.TerreinProject",
+        "description": "VDBH 3D-project met opmerkingen",
+        "icon": "icon.ico",
+        "role": "Editor"
       }
     ]
   },

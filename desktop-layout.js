@@ -17,7 +17,9 @@
     {name:'Bestanden',groups:[{items:[
      {name:'Importeren',run:file('file')},
      {name:'Ondergrond',run:file('underlayFile')},
-     {name:'Exporteren',run:()=>ctx.features.action(()=>ctx.features.chooseExport()),enabled:()=>!ctx.features.reportBusy&&(ctx.features.comments.length>0||ctx.hasReport())}
+     {name:'Exporteren',run:()=>ctx.features.action(()=>ctx.features.chooseExport()),enabled:()=>!ctx.features.reportBusy&&(ctx.features.comments.length>0||ctx.hasReport())},
+     {name:'Project importeren',run:()=>ctx.features.action(()=>ctx.features.importProject()),enabled:native,divider:true},
+     {name:'Project exporteren',run:()=>ctx.features.action(()=>ctx.features.exportProject()),enabled:native}
     ]}]},
     {name:'Gereedschappen',groups:[
      {name:'Meten & Profielen',items:[

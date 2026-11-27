@@ -1,6 +1,65 @@
 {
   "entries": [
     {
+      "version": "1.0.1",
+      "date": "27 november 2026",
+      "changes": [
+        "Officiële uitgave VDBH Terrein Viewer 1.0.1.",
+        "Dubbelklik op een .vdbhproject-bestand om het 3D-model met opmerkingen direct te openen, ook als de viewer al actief is.",
+        "Deel modellen, opmerkingen, meetpunten en profielen via Project exporteren; Project importeren blijft als alternatief beschikbaar.",
+        "Het opmerkingenrapport heeft duidelijke modelranden en een eigen kleur per opmerking. Verbonden driehoeken met dezelfde Z kleuren mee binnen 1 mm.",
+        "De gehele handleiding is bijgewerkt, inclusief PDF-export en het delen en openen van 3D-projecten. Bestaande projecten en rapporten blijven behouden."
+      ]
+    },
+    {
+      "version": "0.2.74",
+      "date": "27 november 2026",
+      "changes": [
+        "Dubbelklik op een .vdbhproject-bestand om het model met de opmerkingen direct in de viewer te openen. Een nieuw project aanmaken of handmatig importeren is niet nodig.",
+        "Werkt zowel bij een nieuwe start als wanneer de viewer al openstaat. Niet-opgeslagen wijzigingen worden eerst afgehandeld.",
+        "Na het openen staan de opmerkingenlijst en labels aan en wordt het beeld op de eerste opmerking gericht. De Windows-installer registreert de bestandsextensie.",
+        "Tijdens een lopende actie of dialoog wacht een dubbelgeklikt bestand totdat de viewer klaar is. De handleiding is bijgewerkt."
+      ]
+    },
+    {
+      "version": "0.2.73",
+      "date": "27 november 2026",
+      "changes": [
+        "De gehele handleiding is herschreven voor de actuele menus, icoonknoppen en functies.",
+        "Direct bovenaan staat hoe je opmerkingen exporteert als PDF of als interactief 3D-project (.vdbhproject), met aparte stappen voor uitvoerder en ontvanger.",
+        "De handleiding beschrijft nu ook lokaal opslaan versus uitwisselen, kleurvlakken, de 1 mm Z-marge, rapporten, sneltoetsen en veelvoorkomende vragen.",
+        "Een los leesbare HTML-handleiding en tekstversie zijn toegevoegd aan het bouwpakket."
+      ]
+    },
+    {
+      "version": "0.2.72",
+      "date": "27 november 2026",
+      "changes": [
+        "Nieuw: Bestanden > Project exporteren bewaart het model, alle opmerkingen, hun XYZ-locaties, meetpunten en profielen samen in één .vdbhproject-bestand.",
+        "Via Bestanden > Project importeren kan een collega het complete model met opmerkingen in 3D bekijken, zonder de oorspronkelijke bronbestanden.",
+        "Importeren maakt een nieuwe lokale projectkopie. Bestaande projecten blijven behouden; niet-opgeslagen wijzigingen worden eerst afgehandeld.",
+        "Het projectbestand bevat de actuele viewerinhoud, ook opmerkingen die nog niet lokaal zijn opgeslagen. Beide gebruikers hebben versie 0.2.72 of nieuwer nodig."
+      ]
+    },
+    {
+      "version": "0.2.71",
+      "date": "27 november 2026",
+      "changes": [
+        "In het opmerkingenrapport kleuren alle verbonden driehoeken met dezelfde Z-waarde mee; maximaal 1 mm verschil ten opzichte van het opmerkingspunt.",
+        "Iedere opmerking krijgt een eigen kleur voor het vlak, de puntmarkering, het nummer en de tabelregel. De status blijft apart leesbaar in de tabel.",
+        "Bij meerdere opmerkingen op hetzelfde vlak worden hun kleuren in transparante stroken weergegeven."
+      ]
+    },
+    {
+      "version": "0.2.70",
+      "date": "27 november 2026",
+      "changes": [
+        "Het opmerkingenrapport toont donkere modelranden en duidelijkere kniklijnen, ook als Triangles in de viewer uitstaat.",
+        "Het werkelijke aaneengesloten modelvlak bij een opmerking krijgt een licht transparante kleur: oranje voor open en groen voor afgehandeld.",
+        "De puntmarkering en het nummer blijven gekoppeld aan de exacte opgeslagen locatie. Deze aanpassing geldt alleen voor de overzichtstekening in het opmerkingenrapport."
+      ]
+    },
+    {
       "version": "0.2.69",
       "date": "24 november 2026",
       "changes": [
